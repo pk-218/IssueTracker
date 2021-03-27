@@ -16,10 +16,10 @@ module.exports = {
                     }
                 }
             )
-            // Why did we do this? https://docs.github.com/en/rest/reference/issues#list-repository-issues
+            // Refer to https://docs.github.com/en/rest/reference/issues#list-repository-issues
             const data = response.data.filter((issue) => !(issue.hasOwnProperty("pull_request")))
             if (data.length > 0) {
-                message.channel.send(`Okay, showing all open issues from ${repo} owned by ${owner}`);
+                message.channel.send(`Showing all open issues from ${repo} owned by ${owner}`);
                 for (let i = 0; i < data.length; i += 1) {
                     message.channel.send(data[i].html_url);
                 }
@@ -35,9 +35,6 @@ module.exports = {
                     break;
                 case 301:
                     message.channel.send(`Sorry, looks like the repository ${owner}/${repo} has moved permanently`);
-                    break;
-                case 422:
-                    message.channel.send(`Sorry, this is an unprocessable entity`);
                     break;
             }
         }
